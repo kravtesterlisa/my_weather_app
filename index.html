@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+    <!-- connect styles.css page -->
+    <link href="styles.css" rel="stylesheet" type="text/css"/>
+    <!-- connect bootstrap link -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <!-- connect test.js page -->
+    <!-- <script src="scripts.js"></script> -->
+    <!-- add axios.-->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+
+</head>
+<body> 
+
+
+<div class = "container">
+
+<!-- search_field         "Input city"   -->
+<div class="input-group mb-3">
+    <input id ="input" type="text" class="form-control" placeholder="Input your city" aria-label="Recipient's username"
+        aria-describedby="button-addon2">
+    <button class="btn btn-outline-secondary" type="button" id="button-addon2">select</button>
+</div>
+<script>
+    //API connect
+      
+        
+        function stopclick(event) {
+            event.preventDefault();
+            let city = document.querySelector("#button-addon2");
+            let city_name = document.querySelector("#input").value;
+          
+            let API_key = '53ebcd69e2df003588fbe1573582f02b';
+            let API_URL = `https://api.openweathermap.org/data/2.5/weather?q=${city_name}&appid=${API_key}&units=metric`;
+             // Make a request for a user with a given ID
+            axios.get(`${API_URL}&appid=${API_key}`).then(showTemperature); 
+        }
+        let city_from_button = document.querySelector("#button-addon2");
+        city_from_button.addEventListener("click", stopclick);
+
+        function showTemperature(response) {
+            console.log(response.data.main.temp);
+            let temperature = document.querySelector('#show_temperature');
+            temperature.innerHTML = Math.round(response.data.main.temp);
+            let show_city = document.querySelector('#current_city');
+            show_city.innerHTML = response.data.name;
+
+        }
+       
+
+
+
+
+
+</script>
+<!-- <script>
+    function  stopclick (event){
+        event.preventDefault();       
+        let city =  document.querySelector("#button-addon2");
+        let city_name = document.querySelector("#input").value;
+        city.innerHTML = city_name;
+    }
+    let city_from_button = document.querySelector("#button-addon2");
+    city_from_button.addEventListener("click", stopclick);
+</script> -->
+
+
+<!-- current_city_block   "Current_city"   -->
+<div class="current_city_block">
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 id="current_city" class="card-title">Minsk</h5>
+        <h6 id="show_time" class="card-subtitle mb-2 text-muted">22:33/🌙</h6>
+        <h4>☁️</h4>
+        <h3 id="show_temperature">here</h3>
+        <p class="card-text"></p>
+    </div>
+    <script>
+          let today = new Date();
+            let day = today.getDay();
+            let daylist = ["Sunday", "Monday", "Tuesday", "Wednesday ", "Thursday", "Friday", "Saturday"];
+            let hour = today.getHours();
+            let minutes = today.getMinutes();
+            let current_time = (daylist[0] + " " + hour + ":" + minutes);
+            console.log(current_time);
+
+            // current day + time is displaying  in id=show_time" 
+
+            let position = document.querySelector("#show_time");
+            console.log(position);
+            position.innerHTML = current_time;
+    </script>
+</div>
+</div>
+
+
+<!-- next_day_block       "Weather for next day"  -->
+<!--div class="next_day_block">
+<div class="card">
+    <div class="card-body">
+        <h3>weather for the next day</h3>
+
+        <div class="container">
+        <div class="row row-cols-5">
+        <div class="col">12:00</br>
+             -1C</div>
+        <div class="col">18:00 -3C</div>
+        <div class="col">23:00 -6C</div>
+        <div class="col">4:00 -4C</div>
+        <div class="col">9:00 -2C</div>
+        </div>
+        </div>
+    </div>
+</div>
+</div> -->
+        
+
+
+
+
+<!-- dress_view_block     "How to dress"  
+<div class="how_to_dress">
+<div class="card text-center">
+    <div class="card-header">
+        How to dress
+    </div>
+    <div class="card-body">
+        Here your dress recommendet
+    </br>
+    <img src="" class="card-img-top" alt="warm" width="500" height="660">
+        
+        <p class="card-text"></p>
+        <a href="#" class="btn btn-primary">Get your dress</a>
+    </div>
+    
+</div>
+</div> -->
+
+<!-- next_couple_days     "Weather for a couple of days"  -->
+<div class="next_couple_days">
+<div class="card">
+    <div class="card-body">
+        <h3>weather for a couple of days</h3>
+
+        <div class="container">
+            <div class="row row-cols-auto">
+                <div class="card"><div class="card-header">
+                    Monday
+                </div><div class="col">-12С/-14С</div></div>
+
+                <div class="card">
+                    <div class="card-header">
+                        Tuesday
+                    </div><div class="col">-12С/-14С</div></div>
+                <div class="card">
+                    <div class="card-header">
+                        Wednesday
+                    </div>
+                    <div class="col">-12С/-14С</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                    Thursday
+                    </div>
+                    <div class="col">-12С/-14С</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                    Friday
+                    </div>
+                    <div class="col">-12С/-14С</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+    
+
+</div>
+</body>
+</html>
